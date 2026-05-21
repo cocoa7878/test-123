@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>랜덤 뽑기</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Pretendard", sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 500px;
+      background: white;
+      border-radius: 24px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    textarea {
+      width: 100%;
+      height: 180px;
+      border: 2px solid #ddd;
+      border-radius: 12px;
+      padding: 15px;
+      font-size: 16px;
+      resize: none;
+      outline: none;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background: #667eea;
+      color: white;
+      border: none;
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: 0.2s;
+      width: 100%;
+    }
+
+    button:hover {
+      background: #5568d8;
+      transform: translateY(-2px);
+    }
+
+    .result {
+      margin-top: 25px;
+      padding: 20px;
+      border-radius: 16px;
+      background: #f5f7ff;
+      font-size: 28px;
+      font-weight: bold;
+      color: #333;
+      min-height: 80px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .guide {
+      margin-bottom: 12px;
+      color: #777;
+      font-size: 14px;
+    }
+
+    .footer {
+      margin-top: 18px;
+      color: #999;
+      font-size: 13px;
+    }
+
+    @media (max-width: 500px) {
+      .result {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>🎲 랜덤 뽑기</h1>
+
+    <div class="guide">
+      한 줄에 하나씩 입력하세요
+    </div>
+
+    <textarea id="items" placeholder="예시:
+치킨
+피자
+햄버거
+떡볶이"></textarea>
+
+    <button onclick="pickRandom()">
+      랜덤으로 뽑기
+    </button>
+
+    <div class="result" id="result">
+      결과가 여기에 표시됩니다
+    </div>
+
+    <div class="footer">
+      GitHub Pages로 배포 가능 🚀
+    </div>
+  </div>
+
+  <script>
+    function pickRandom() {
+      const text = document.getElementById("items").value;
+
+      const items = text
+        .split("\n")
+        .map(item => item.trim())
+        .filter(item => item !== "");
+
+      const resultBox = document.getElementById("result");
+
+      if (items.length === 0) {
+        resultBox.innerText = "항목을 입력해주세요!";
+        return;
+      }
+
+      const randomIndex = Math.floor(Math.random() * items.length);
+      const selected = items[randomIndex];
+
+      resultBox.innerText = "🎉 " + selected;
+    }
+  </script>
+
+</body>
+</html>
